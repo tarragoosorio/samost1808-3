@@ -53,9 +53,9 @@ public class Book {
     @Override
     public String toString() {
         return "Book{" +
-                "isbn=" + isbn +
-                ", title=" + title +
-                ", year=" + year +
+                "isbn=" + isbn.get() +
+                ", title=" + title.get() +
+                ", year=" + year.get() +
                 '}';
     }
 }
