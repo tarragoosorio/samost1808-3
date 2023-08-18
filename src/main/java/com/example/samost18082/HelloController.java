@@ -10,8 +10,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.IntegerStringConverter;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.*;
 import java.util.HashMap;
+import java.util.Map;
 
 public class HelloController {
 
@@ -34,9 +38,26 @@ public class HelloController {
         startChangeTracking();
 
         saveBtn.setOnAction(actionEvent -> {
-            System.out.println(isbnMap);}
+                    try {
+                        saveToFile();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
 
         );
+    }
+
+    private void saveToFile() throws IOException {
+
+        String fname = "OUTPUT.txt";
+        FileWriter output = new FileWriter(new File(fname));
+        for (Map.Entry<Integer, Book> Map :isbnMap.entrySet()) {
+            output.write(Map.getKey() + " " + Map.getValue());
+            System.out.println("Что-то изменилось");
+            output.close();
+        }
+
     }
 
     public void startChangeTracking(){
